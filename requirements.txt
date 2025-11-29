@@ -1,0 +1,4 @@
+djangorestframework
+astrapy
+sentence-transformers
+openai
