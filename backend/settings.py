@@ -25,14 +25,12 @@ SECRET_KEY = "django-insecure-6_ts%8a2-2=e$rnbzxy14j*3m&82=w@bn#%69hs$4x-5sxsc%!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-import os
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    "corsheaders",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -41,11 +39,11 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "api",
-
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -54,9 +52,16 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
-CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = "backend.urls"
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_HEADERS = [
+    'content-type',
+    'authorization',
+    'x-requested-with',
+]
+CORS_EXPOSE_HEADERS = ["Content-Type", "X-CSRFToken"]
 
 TEMPLATES = [
     {
@@ -130,3 +135,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 from dotenv import load_dotenv
 load_dotenv()
+
+# settings.py (nếu dùng django-cors-headers)
+CORS_ALLOW_METHODS = ['GET', 'POST', 'OPTIONS']  # Đã có OPTIONS
+CORS_ALLOW_HEADERS = ['content-type', 'authorization']  # Giữ đơn giản
+CORS_ALLOWED_ORIGINS = ['http://localhost:3000']  # Chỉ dev origins
