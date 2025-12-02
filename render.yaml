@@ -2,10 +2,10 @@ services:
   - type: web
     name: backend-tmdt
     env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn backend.wsgi
+    region: singapore
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn backend.wsgi:application --bind=0.0.0.0:10000"
     envVars:
-      - key: DEBUG
-        value: "False"
-      - key: SECRET_KEY
-        generateValue: true
+      - key: PYTHON_VERSION
+        value: 3.10
+    autoDeploy: true
